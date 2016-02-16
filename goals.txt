@@ -1,0 +1,41 @@
+Why even do this?
+=================
+I want to be able to search pins. Grepping through pins seems like fun.
+
+Desired Functionality
+=====================
+channels:
+- read them
+- post a message
+- get pins
+- get files
+- get info
+
+private messages:
+- read them
+- make a message
+- get pins
+- get files
+
+UI Decisions
+=================
+2 root directories
+channels/
+messages/
+
+each non-root directory has a
+chat
+pins
+files
+
+channels additionally have a
+info
+
+Interactivity
+=============
+open chat file 	-> fetch the channel or private message history
+open pins 		-> fetch the pins
+open files 		-> fetch the file names
+open info 		-> fetch the info
+append to chat	-> post message
+
