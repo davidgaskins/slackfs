@@ -1,0 +1,14 @@
+2 root directories
+channels/
+messages/
+
+each non-root directory has a
+.chat
+.pins
+.files
+.info
+
+channel actions:
+- read them
+- post a message
+- 
