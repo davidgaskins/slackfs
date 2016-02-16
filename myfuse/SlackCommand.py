@@ -16,12 +16,14 @@ class SlackCommand(object):
 	#take in a dictionary of parameters of parameters to hit slack with, return the url
 	def form_url(self, parameters):
 		url_parameters = ""
-		for key,value in parameters.iteritems():
+		for key,value in parameters.items():
 			url_parameters += "&" + key +"=" + value
 		return self.base_url + url_parameters 
 
 if __name__ == '__main__':
 	command = SlackCommand("channels.history")
 	url_params = {"channel":"C0MA6SXPW"}
-	print (command.get_url(url_params))
+	returned = command.get_url(url_params)
+	for item in returned:
+		print (item + ": " + str(returned[item]))
 	
