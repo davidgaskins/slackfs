@@ -1,3 +1,5 @@
 #exlude dependency directories
 .vagrant/
 fuse/
+#exclude file names with tokens etc.
+*.hideme
