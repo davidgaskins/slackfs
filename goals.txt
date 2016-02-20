@@ -11,33 +11,16 @@ channels:
 - get files
 - get info
 
-private messages:
-- read them
-- make a message
-- get pins
-- get files
-
 UI Decisions
 =================
 channel.chat
 channel.pins
 channel.files
 channel.info
-message.chat
-message.pins
-message.files
-
-each non-root directory has a
-chat
-pins
-files
-
-channels additionally have a
-info
 
 Interactivity
 =============
-open chat file 	-> fetch the channel or private message history
+open chat file 	-> fetch the channel history
 open pins 		-> fetch the pins
 open files 		-> fetch the file names
 open info 		-> fetch the info
