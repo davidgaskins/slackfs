@@ -9,3 +9,4 @@ To run:
   4. python2 slackfs.py [mountpoint] Note: /home/vagrant/tmp/ has been provided with the appropriate permissions.
 
 Basically a mirror of Roger Howards IssueFS https://github.com/rogerhoward/issuefs/, I just subbed out github APIs for slack ones.
+SlackAPI documentation found here: https://api.slack.com/methods
