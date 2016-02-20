@@ -35,7 +35,14 @@ class SlackFile(object):
 		if self.type == "chat":
 			messages = url_results.get("messages")
 			for message in messages:
-				channel_contents.append('{}:{}\n-{}'.format(message.get("username"),message.get("text"), message.get("ts")))
+				#identify user
+				if message.get("username") is None:
+					print("identify user: ")
+					user = SlackCommand("users.info").get_url({"user":message.get("user")}).get("user").get("name")
+				else:
+					user = message.get("username")
+					print("no need: ", user)
+				channel_contents.append('\"{}\"-{}\n'.format(message.get("text"),user))			
 		elif self.type == "pins":
 			pass
 		elif self.type == "files":
