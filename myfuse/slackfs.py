@@ -60,8 +60,6 @@ class SlackFS(Operations):
         # Else if path is anything else, assume it's an issue entry
         else:            
             path_content = self._contents(path)
-            print("dg: ",path_content)
-            print("dg: ", len(path_content))
             s = {'st_ctime': 1450647916.0, 'st_mtime': 1450647886.0, 'st_nlink': 19, 'st_mode': 33188, 'st_size': len(path_content), 'st_gid': 20, 'st_uid': 501, 'st_atime': 1455426628.0}
         return s
 
@@ -171,12 +169,12 @@ class SlackFS(Operations):
     def flush(self, path, fh):
         if debug: print('flush path: {}'.format(path))
         # Mock
-        return 0
+        return False
 
     def release(self, path, fh):
         if debug: print('release path: {}'.format(path))
         # Mock
-        return 1
+        return True
 
     def fsync(self, path, fdatasync, fh):
         if debug: print('fsync path: {}'.format(path))

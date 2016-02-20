@@ -33,25 +33,29 @@ class SlackFile(object):
 		#fetch data
 		url_results = SlackCommand(commands[self.type]).get_url({"channel":self.id})
 		channel_contents = []
+		#based upon file type, format the text stream as you want. factories would be the next step here
 		if self.type == "chat":
 			messages = url_results.get("messages")
 			for message in messages:
-				#identify user
-				if message.get("username") is None:
-					user = SlackCommand("users.info").get_url({"user":message.get("user")}).get("user").get("name")
-				else:
-					user = message.get("username")
+				user = self.get_user(message.get("username"), message.get("user"))
 				#append the contents to an array
 				channel_contents.append('\"{}\"-{}'.format(message.get("text"),user))			
 		elif self.type == "pins":
-			pass
+			pin_items = url_results.get("items")
+			for pin in pin_items:
+				message = pin.get("message")
+				user = self.get_user(message.get("username"), message.get("user"))
 		elif self.type == "files":
 			pass
 		elif self.type == "info":
 			pass
 		#join all the text all at once
 		return "\n".join(channel_contents)
-
+	#identify the user
+	def get_user(self, user_name, user_id):
+		if user_name is None:
+			return SlackCommand("users.info").get_url({"user":user_id}).get("user").get("name")
+		return user_name
 if __name__ == '__main__':
 	command = SlackCommand("channels.list")
 	# url_params = {"channel":"C0MA6SXPW"}
