@@ -37,17 +37,19 @@ class SlackFile(object):
 		if self.type == "chat":
 			messages = url_results.get("messages")
 			for message in messages:
-				user = self.get_user(message.get("username"), message.get("user"))
+				user = self.get_user(message)
 				#append the contents to an array
 				channel_contents.append('\"{}\"-{}'.format(message.get("text"),user))			
 		elif self.type == "pins":
 			pin_items = url_results.get("items")
 			for pin in pin_items:
 				message = pin.get("message")
-				user = self.get_user(message.get("username"), message.get("user"))
+				user = self.get_user(message)
 				channel_contents.append('{} -> \"{}\"-{}'.format(message.get("pinned_to"),message.get("text"),user))
 		elif self.type == "files":
-			pass
+			file_items = url_results.get("files")
+			for file_item in file_items:
+				user = self.get_user(file_item)
 		elif self.type == "info":
 			pass
 		#join all the text all at once
@@ -55,10 +57,10 @@ class SlackFile(object):
 		channel_contents.append("")
 		return "\n".join(channel_contents)
 	#identify the user
-	def get_user(self, user_name, user_id):
-		if user_name is None:
-			return SlackCommand("users.info").get_url({"user":user_id}).get("user").get("name")
-		return user_name
+	def get_user(self, json_wrapper):
+		if json_wrapper.get("username") is None:
+			return SlackCommand("users.info").get_url({"user":json_wrapper.get("user")}).get("user").get("name")
+		return json_wrapper.get("username")
 if __name__ == '__main__':
 	command = SlackCommand("channels.list")
 	# url_params = {"channel":"C0MA6SXPW"}
