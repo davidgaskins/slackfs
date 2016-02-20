@@ -50,10 +50,12 @@ class SlackFile(object):
 			file_items = url_results.get("files")
 			for file_item in file_items:
 				user = self.get_user(file_item)
-				print ("dg: " + user)
 				channel_contents.append('{} -> \"{}\"[{}]-{}'.format(file_item.get("channels"), file_item.get("title"), file_item.get("url_private_download"),user))
 		elif self.type == "info":
-			pass
+			name = url_results.get("channel").get("name")
+			topic = url_results.get("channel").get("topic").get("value")
+			purpose = url_results.get("channel").get("purpose").get("value")
+			channel_contents.append('{}.topic: {}\n{}.purpose: {}'.format(name, topic, name, purpose))
 		#join all the text all at once
 		#tack on a extra element to get a new line
 		channel_contents.append("")
