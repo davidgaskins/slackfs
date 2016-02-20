@@ -27,6 +27,7 @@ class SlackFile(object):
 		self.name = name[0]
 		self.id = name[1]
 		self.type = path[1]
+	#get the contents of a file based upon type: .chat, .pins, .files, .info
 	def _contents(self):
 		commands = {"chat":"channels.history", "pins":"pins.list", "files":"files.list", "info":"channels.info"}
 		#fetch data

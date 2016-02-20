@@ -18,7 +18,7 @@ class SlackFS(Operations):
         try:
             slack_stream = SlackFile(path)
         except:
-            return False
+            return "bad stuff"
 
         if debug: print('_contents stream: {}'.format(path))
 
@@ -144,7 +144,7 @@ class SlackFS(Operations):
     def open(self, path, flags):
         if debug: print('open path: {}'.format(path))
         # Mock
-        return True
+        return False
 
     def create(self, path, mode, fi=None):
         if debug: print('create path: {}, mode: {}'.format(path, mode))
@@ -155,6 +155,7 @@ class SlackFS(Operations):
         if debug: print('read path: {} - {}:{}'.format(path, length, offset))
         # Retrieve contents, apply read offsets, and return
         # Added str() explicitly to return a byte array which read() expects
+        #python3 incompatible!!!
         return str(self._contents(path)[offset:offset+length])
 
     def write(self, path, buf, offset, fh):
@@ -170,12 +171,12 @@ class SlackFS(Operations):
     def flush(self, path, fh):
         if debug: print('flush path: {}'.format(path))
         # Mock
-        return False
+        return 0
 
     def release(self, path, fh):
         if debug: print('release path: {}'.format(path))
         # Mock
-        return True
+        return 1
 
     def fsync(self, path, fdatasync, fh):
         if debug: print('fsync path: {}'.format(path))
