@@ -37,18 +37,18 @@ class SlackFile(object):
 			for message in messages:
 				#identify user
 				if message.get("username") is None:
-					print("identify user: ")
 					user = SlackCommand("users.info").get_url({"user":message.get("user")}).get("user").get("name")
 				else:
 					user = message.get("username")
-					print("no need: ", user)
-				channel_contents.append('\"{}\"-{}\n'.format(message.get("text"),user))			
+				#append the contents to an array
+				channel_contents.append('\"{}\"-{}'.format(message.get("text"),user))			
 		elif self.type == "pins":
 			pass
 		elif self.type == "files":
 			pass
 		elif self.type == "info":
 			pass
+		#join all the text all at once
 		return "\n".join(channel_contents)
 
 if __name__ == '__main__':
