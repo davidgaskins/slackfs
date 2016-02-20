@@ -21,10 +21,6 @@ class SlackFS(Operations):
             return False
 
         if debug: print('_contents stream: {}'.format(path))
-        slack_stream
-        # Get Github issue
-        gh = login(self.username, self.password)
-        issue = gh.issue(self.username, self.repo, issue)
 
         # Concatanate issue title and body and return as file content
         file_contents =  slack_stream._contents()
