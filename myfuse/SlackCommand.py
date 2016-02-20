@@ -19,11 +19,32 @@ class SlackCommand(object):
 		for key,value in parameters.items():
 			url_parameters += "&" + key +"=" + value
 		return self.base_url + url_parameters 
+class SlackChannel(object):
+	"""pack and unpack a channel name"""
+	def __init__(self, path):
+		path = path.strip('/').split('.')
+		name = path[0].split('_')
+		self.name = name[0]
+		self.id = name[1]
+		self.type = path[1]
+	def _contents(self):
+		commands = {"chat":"channels.history", "pins":"pins.list", "files":"files.list", "info":"channels.info"}
+		#fetch data
+		SlackCommand(commands[self.type]).get_url({"channel":self.id})
+		if self.type == "chat":
+			pass
+		elif self.type == "pins":
+			pass
+		elif self.type == "files":
+			pass
+		elif self.type == "info":
+			pass
 
 if __name__ == '__main__':
-	command = SlackCommand("channels.history")
-	url_params = {"channel":"C0MA6SXPW"}
-	returned = command.get_url(url_params)
-	for item in returned:
-		print (item + ": " + str(returned[item]))
+	command = SlackCommand("channels.list")
+	# url_params = {"channel":"C0MA6SXPW"}
+	returned = command.get_url({})
+	channels = returned.get("channels")
+	for channel in channels:
+		print(channel.get("id"), channel.get("name"))
 	

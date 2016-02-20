@@ -19,9 +19,13 @@ private messages:
 
 UI Decisions
 =================
-2 root directories
-channels/
-messages/
+channel.chat
+channel.pins
+channel.files
+channel.info
+message.chat
+message.pins
+message.files
 
 each non-root directory has a
 chat
