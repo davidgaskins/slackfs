@@ -1,6 +1,6 @@
 import os, sys, errno
 from fuse import FUSE, FuseOSError, Operations
-from SlackCommand import SlackCommand
+from SlackCommand import SlackCommand, SlackFile
 
 debug = True
 #based upon IssueFS, licensed based upon MIT
@@ -14,22 +14,22 @@ class SlackFS(Operations):
         # For now, return the issue title and body concatenated
         if debug: print('_contents path: {}'.format(path))
 
-        # Extract issue from filepath, coerce to int; if fails, abort
+        #parse the file name and type
         try:
-            issue = int(path.strip('/').split('.')[0])
+            slack_stream = SlackFile(path)
         except:
             return False
 
-        if debug: print('_contents issue: {}'.format(issue))
-
+        if debug: print('_contents stream: {}'.format(path))
+        slack_stream
         # Get Github issue
         gh = login(self.username, self.password)
         issue = gh.issue(self.username, self.repo, issue)
 
         # Concatanate issue title and body and return as file content
-        issue_contents = 'Title: {}\n-----\n{}\n'.format(issue.title, issue.body)
-        if debug: print('_contents issue_contents: {}'.format(issue_contents))
-        return issue_contents
+        file_contents =  slack_stream._contents()
+        if debug: print('_contents file_contents: {}'.format(file_contents))
+        return file_contents
 
     # Filesystem methods
     # ==================
