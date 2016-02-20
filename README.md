@@ -1,6 +1,9 @@
 # slackfs
 The slowest minimal fs you are likely to ever see. 
 
+
+Basically a mirror of Roger Howards IssueFS https://github.com/rogerhoward/issuefs/, I just subbed out github APIs for slack ones.
+
 To run:
   1. Get the token for your slack url and place it into 'credentials.hideme' (*.hideme is in the .gitignore)
   2. vagrant up
