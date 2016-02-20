@@ -180,10 +180,10 @@ class SlackFS(Operations):
         if debug: print('fsync path: {}'.format(path))
         # Mock
         return True
-def main():
+def main(mountpoint):
     # Create new FUSE filesystem at designated mountpoint
-    FUSE(SlackFS(), "/home/vagrant/tmp", nothreads=True, foreground=True)
+    FUSE(SlackFS(), mountpoint, nothreads=True, foreground=True)
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
