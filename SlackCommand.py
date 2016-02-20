@@ -4,7 +4,7 @@ class SlackCommand(object):
 	"""Makes a call to the slack api"""
 	def __init__(self, api_name):
 		#read the credential file
-		credentials = open('../credentials.hideme', 'r').readline()
+		credentials = open('credentials.hideme', 'r').readline()
 		token = credentials.split("=")[1]
 		#define the base api url to hit with requests
 		slack_url = "https://slack.com/api/" + api_name
@@ -50,6 +50,7 @@ class SlackFile(object):
 			file_items = url_results.get("files")
 			for file_item in file_items:
 				user = self.get_user(file_item)
+				print ("dg: " + user)
 				channel_contents.append('{} -> \"{}\"[{}]-{}'.format(file_item.get("channels"), file_item.get("title"), file_item.get("url_private_download"),user))
 		elif self.type == "info":
 			pass
@@ -59,7 +60,7 @@ class SlackFile(object):
 		return "\n".join(channel_contents)
 	#identify the user
 	def get_user(self, json_wrapper):
-		if json_wrapper.get("username") is None:
+		if json_wrapper.get("username") is None or json_wrapper.get("username") == "":
 			return SlackCommand("users.info").get_url({"user":json_wrapper.get("user")}).get("user").get("name")
 		return json_wrapper.get("username")
 if __name__ == '__main__':

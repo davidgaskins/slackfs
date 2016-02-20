@@ -14,10 +14,11 @@ sed -i 's/2:9:4/2:9:5/' lib/Makefile.in &&
             INIT_D_PATH=/tmp/init.d &&
 
 make
-
+chmod 644 /etc/fuse.conf
 #install python fuse bindings and html request libraries
 apt-get install -y python
 apt-get install -y python-pip
 mkdir /home/vagrant/tmp
+chown -R vagrant:vagrant /home/vagrant/tmp
 pip install fusepy
 pip install requests

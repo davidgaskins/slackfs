@@ -18,7 +18,7 @@ class SlackFS(Operations):
         try:
             slack_stream = SlackFile(path)
         except:
-            return "bad stuff"
+            return False
 
         if debug: print('_contents stream: {}'.format(path))
 
@@ -181,7 +181,7 @@ class SlackFS(Operations):
         # Mock
         return True
 def main():
-    # Create new FUSE filesystem at designated mountpoint using IssueFS
+    # Create new FUSE filesystem at designated mountpoint
     FUSE(SlackFS(), "/home/vagrant/tmp", nothreads=True, foreground=True)
 
 
