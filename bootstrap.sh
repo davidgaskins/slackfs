@@ -16,8 +16,8 @@ sed -i 's/2:9:4/2:9:5/' lib/Makefile.in &&
 make
 
 #install python fuse bindings and html request libraries
-apt-get install -y python3
-apt-get install -y python3-pip
+apt-get install -y python
+apt-get install -y python-pip
 mkdir /home/vagrant/tmp
-pip3 install fusepy
-pip3 install requests
+pip install fusepy
+pip install requests
