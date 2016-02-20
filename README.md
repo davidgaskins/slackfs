@@ -1,5 +1,5 @@
 # slackfs
-The slowest minimal fs you are likely to ever see. 
+The slowest minimal fs you are likely to ever see. However... it also provides grep access to pins, so it's almost worth it. 
 
 
 To run:
