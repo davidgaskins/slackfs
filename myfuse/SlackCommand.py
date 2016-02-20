@@ -45,11 +45,14 @@ class SlackFile(object):
 			for pin in pin_items:
 				message = pin.get("message")
 				user = self.get_user(message.get("username"), message.get("user"))
+				channel_contents.append('{} -> \"{}\"-{}'.format(message.get("pinned_to"),message.get("text"),user))
 		elif self.type == "files":
 			pass
 		elif self.type == "info":
 			pass
 		#join all the text all at once
+		#tack on a extra element to get a new line
+		channel_contents.append("")
 		return "\n".join(channel_contents)
 	#identify the user
 	def get_user(self, user_name, user_id):
